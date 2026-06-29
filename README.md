@@ -1,5 +1,10 @@
-# Planly GitHub Pages
+# Planly GitHub Pages v2
 
-Einfach alle Dateien ins Repository hochladen.
-Keine Installation nötig.
-GitHub Pages funktioniert direkt.
+Diese Version ersetzt die Dateien aus v1.
+
+Verbesserungen:
+- edlere Sidebar
+- dunkle Buttons
+- Dashboard mit Statistik-Karten
+- moderne Schriftgrößen
+- vorbereitet für weitere Module

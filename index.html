@@ -1,39 +1,55 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-<meta charset="UTF-8">
+<!doctype html>
+<html lang="de"><head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Planly</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="sidebar">
+<aside class="sidebar">
 <h1>Planly</h1>
-<button onclick="show('dashboard')">Dashboard</button>
-<button onclick="show('tasks')">Aufgaben</button>
-<button onclick="show('school')">Schule</button>
-<button onclick="show('calendar')">Kalender</button>
-</div>
-<div class="content">
+<button onclick="showPage('dashboard')">🏠 Dashboard</button>
+<button onclick="showPage('tasks')">✅ Aufgaben</button>
+<button onclick="showPage('school')">🎓 Schule</button>
+<button onclick="showPage('calendar')">📅 Kalender</button>
+</aside>
+
+<main class="main">
 <section id="dashboard" class="page active">
-<h2>Dashboard</h2>
-<div class="card">Willkommen bei Planly.</div>
+<h2>Guten Tag 👋</h2>
+<p class="subtitle">Montag · Organisation auf einen Blick</p>
+<div class="grid">
+<div class="card"><h3>Heute</h3><strong>3</strong><span>Aufgaben</span></div>
+<div class="card"><h3>Klausuren</h3><strong>1</strong><span>anstehend</span></div>
+<div class="card"><h3>Fortschritt</h3><strong>82%</strong><span>erledigt</span></div>
+<div class="card"><h3>Ø Noten</h3><strong>11,8</strong><span>Punkte</span></div>
+</div>
 </section>
+
 <section id="tasks" class="page">
 <h2>Aufgaben</h2>
-<input id="taskInput" placeholder="Neue Aufgabe">
+<div class="toolbar">
+<input id="task" placeholder="Neue Aufgabe">
 <button onclick="addTask()">Hinzufügen</button>
-<ul id="tasksList"></ul>
+</div>
+<ul id="list"></ul>
 </section>
+
 <section id="school" class="page">
 <h2>Schule</h2>
-<div class="card">Noten, Klausuren und Stundenplan folgen.</div>
+<div class="card big">
+<h3>Module</h3>
+<p>• Stundenplan</p>
+<p>• Klausurplaner</p>
+<p>• Noten</p>
+<p>• Lernziele</p>
+</div>
 </section>
+
 <section id="calendar" class="page">
 <h2>Kalender</h2>
-<div class="card">Kalender folgt.</div>
+<div class="card big"><p>Kalender folgt in Version 3.</p></div>
 </section>
-</div>
+</main>
 <script src="app.js"></script>
-</body>
-</html>
+</body></html>
