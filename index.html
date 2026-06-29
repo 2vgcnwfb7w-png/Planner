@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Planly</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="sidebar">
+<h1>Planly</h1>
+<button onclick="show('dashboard')">Dashboard</button>
+<button onclick="show('tasks')">Aufgaben</button>
+<button onclick="show('school')">Schule</button>
+<button onclick="show('calendar')">Kalender</button>
+</div>
+<div class="content">
+<section id="dashboard" class="page active">
+<h2>Dashboard</h2>
+<div class="card">Willkommen bei Planly.</div>
+</section>
+<section id="tasks" class="page">
+<h2>Aufgaben</h2>
+<input id="taskInput" placeholder="Neue Aufgabe">
+<button onclick="addTask()">Hinzufügen</button>
+<ul id="tasksList"></ul>
+</section>
+<section id="school" class="page">
+<h2>Schule</h2>
+<div class="card">Noten, Klausuren und Stundenplan folgen.</div>
+</section>
+<section id="calendar" class="page">
+<h2>Kalender</h2>
+<div class="card">Kalender folgt.</div>
+</section>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
