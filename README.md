@@ -1,10 +1,26 @@
-# Planly GitHub Pages v2
+# Planly GitHub Pages v5 Premium
 
-Diese Version ersetzt die Dateien aus v1.
+Diese Version läuft direkt auf GitHub Pages.
 
-Verbesserungen:
-- edlere Sidebar
-- dunkle Buttons
-- Dashboard mit Statistik-Karten
-- moderne Schriftgrößen
-- vorbereitet für weitere Module
+## Hochladen
+
+1. Alte Dateien im Repository löschen.
+2. Inhalt dieser ZIP hochladen.
+3. 1–2 Minuten warten.
+4. Seite neu laden.
+
+## Enthalten
+
+- Premium-Design
+- neue Sidebar
+- Topbar mit Suche und Uhrzeit
+- Dashboard mit Widgets
+- Aufgaben mit Priorität/Kategorie/Datum
+- echter Monatskalender
+- Stundenplan
+- Schulbereich
+- Klausurplaner
+- Noten-Tracker
+- lokale Speicherung im Browser
+
+Keine Installation nötig.

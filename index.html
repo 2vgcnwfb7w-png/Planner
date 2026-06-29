@@ -1,55 +1,197 @@
 <!doctype html>
-<html lang="de"><head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Planly</title>
-<link rel="stylesheet" href="style.css">
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Planly</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<aside class="sidebar">
-<h1>Planly</h1>
-<button onclick="showPage('dashboard')">🏠 Dashboard</button>
-<button onclick="showPage('tasks')">✅ Aufgaben</button>
-<button onclick="showPage('school')">🎓 Schule</button>
-<button onclick="showPage('calendar')">📅 Kalender</button>
-</aside>
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brandIcon">P</div>
+      <div>
+        <h1>Planly</h1>
+        <p>Premium Organizer</p>
+      </div>
+    </div>
 
-<main class="main">
-<section id="dashboard" class="page active">
-<h2>Guten Tag 👋</h2>
-<p class="subtitle">Montag · Organisation auf einen Blick</p>
-<div class="grid">
-<div class="card"><h3>Heute</h3><strong>3</strong><span>Aufgaben</span></div>
-<div class="card"><h3>Klausuren</h3><strong>1</strong><span>anstehend</span></div>
-<div class="card"><h3>Fortschritt</h3><strong>82%</strong><span>erledigt</span></div>
-<div class="card"><h3>Ø Noten</h3><strong>11,8</strong><span>Punkte</span></div>
-</div>
-</section>
+    <button class="nav active" data-page="dashboard">⌘ Dashboard</button>
+    <button class="nav" data-page="tasks">✓ Aufgaben</button>
+    <button class="nav" data-page="calendar">○ Kalender</button>
+    <button class="nav" data-page="timetable">▦ Stundenplan</button>
+    <button class="nav" data-page="school">✦ Schule</button>
+    <button class="nav" data-page="grades">◈ Noten</button>
+    <button class="nav" data-page="settings">⚙ Einstellungen</button>
 
-<section id="tasks" class="page">
-<h2>Aufgaben</h2>
-<div class="toolbar">
-<input id="task" placeholder="Neue Aufgabe">
-<button onclick="addTask()">Hinzufügen</button>
-</div>
-<ul id="list"></ul>
-</section>
+    <div class="sideWidget">
+      <span>Heute</span>
+      <strong id="sideDate">Planly</strong>
+      <p>klar · ruhig · organisiert</p>
+    </div>
+  </aside>
 
-<section id="school" class="page">
-<h2>Schule</h2>
-<div class="card big">
-<h3>Module</h3>
-<p>• Stundenplan</p>
-<p>• Klausurplaner</p>
-<p>• Noten</p>
-<p>• Lernziele</p>
-</div>
-</section>
+  <main class="app">
+    <header class="topbar">
+      <div class="search">⌕ <input id="globalSearch" placeholder="Suchen in Planly..."></div>
+      <div class="profile">
+        <span id="clock">--:--</span>
+        <div class="avatar">A</div>
+      </div>
+    </header>
 
-<section id="calendar" class="page">
-<h2>Kalender</h2>
-<div class="card big"><p>Kalender folgt in Version 3.</p></div>
-</section>
-</main>
-<script src="app.js"></script>
-</body></html>
+    <section id="dashboard" class="page active">
+      <div class="hero">
+        <div>
+          <p class="eyebrow" id="todayLabel">Heute</p>
+          <h2>Dein Tag, elegant geplant.</h2>
+          <p class="muted">Aufgaben, Schule, Kalender, Noten und Ziele in einer hochwertigen Übersicht.</p>
+        </div>
+        <div class="progressCircle">
+          <strong id="progressText">0%</strong>
+          <span>erledigt</span>
+        </div>
+      </div>
+
+      <div class="statsGrid">
+        <div class="stat"><span>Offene Aufgaben</span><strong id="statOpen">0</strong><p>noch offen</p></div>
+        <div class="stat"><span>Heute</span><strong id="statToday">0</strong><p>geplant</p></div>
+        <div class="stat"><span>Klausuren</span><strong id="statExams">0</strong><p>anstehend</p></div>
+        <div class="stat"><span>Ø Noten</span><strong id="statAverage">-</strong><p>Punkte</p></div>
+      </div>
+
+      <div class="layoutTwo">
+        <section class="panel">
+          <div class="panelHead"><h3>Heute wichtig</h3><span id="todayCount">0</span></div>
+          <div id="todayTasksList" class="list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panelHead"><h3>Monatskalender</h3><span id="calendarMonthLabel"></span></div>
+          <div id="miniCalendar" class="calendarGrid"></div>
+        </section>
+      </div>
+
+      <div class="layoutTwo">
+        <section class="panel">
+          <div class="panelHead"><h3>Nächste Klausuren</h3><span id="dashExamCount">0</span></div>
+          <div id="dashExamList" class="list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panelHead"><h3>Lernfortschritt</h3><span>Q1</span></div>
+          <div class="learningBars">
+            <div><p>Englisch</p><div class="bar"><i style="width:72%"></i></div></div>
+            <div><p>Mathe</p><div class="bar"><i style="width:44%"></i></div></div>
+            <div><p>Geschichte</p><div class="bar"><i style="width:61%"></i></div></div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="tasks" class="page">
+      <div class="pageHead"><p class="eyebrow">Task System</p><h2>Aufgaben</h2><p class="muted">Erstellen, priorisieren, suchen, abhaken und löschen.</p></div>
+
+      <form id="taskForm" class="form wide">
+        <input id="taskTitle" placeholder="Neue Aufgabe">
+        <select id="taskCategory"><option>Schule</option><option>Privat</option><option>Arbeit</option><option>Projekte</option><option>Langfristig</option></select>
+        <select id="taskPriority"><option>Niedrig</option><option>Mittel</option><option>Hoch</option><option>Dringend</option></select>
+        <input id="taskDate" type="date">
+        <button>Hinzufügen</button>
+      </form>
+
+      <div class="toolbar">
+        <input id="taskSearch" placeholder="Aufgaben suchen...">
+        <select id="taskFilter"><option>Alle</option><option>Schule</option><option>Privat</option><option>Arbeit</option><option>Projekte</option><option>Langfristig</option><option>Dringend</option></select>
+      </div>
+
+      <div id="taskList" class="list"></div>
+    </section>
+
+    <section id="calendar" class="page">
+      <div class="pageHead"><p class="eyebrow">Calendar</p><h2>Kalender</h2><p class="muted">Monatsübersicht mit Aufgaben und Klausuren.</p></div>
+      <section class="panel">
+        <div class="panelHead"><h3 id="fullCalendarTitle">Kalender</h3><span>Monat</span></div>
+        <div id="fullCalendar" class="calendarGrid large"></div>
+      </section>
+    </section>
+
+    <section id="timetable" class="page">
+      <div class="pageHead"><p class="eyebrow">Schedule</p><h2>Stundenplan</h2><p class="muted">Wochenübersicht für Schule, Lernen und feste Zeiten.</p></div>
+      <section class="panel">
+        <div class="timetable">
+          <div class="timeCol">
+            <b>Zeit</b><span>08:00</span><span>09:45</span><span>11:30</span><span>13:15</span><span>15:00</span>
+          </div>
+          <div class="dayCol"><b>Mo</b><div>Englisch</div><div>Mathe</div><div>Bio</div><div>Frei</div><div>Tennis</div></div>
+          <div class="dayCol"><b>Di</b><div>Deutsch</div><div>PoWi</div><div>Sport</div><div>Mathe</div><div>Lernen</div></div>
+          <div class="dayCol"><b>Mi</b><div>Geschichte</div><div>Englisch</div><div>Frei</div><div>Gym</div><div>Review</div></div>
+          <div class="dayCol"><b>Do</b><div>Bio</div><div>Deutsch</div><div>Mathe</div><div>Frei</div><div>Projekt</div></div>
+          <div class="dayCol"><b>Fr</b><div>Englisch</div><div>Geschichte</div><div>Sport</div><div>Planung</div><div>Frei</div></div>
+        </div>
+      </section>
+    </section>
+
+    <section id="school" class="page">
+      <div class="pageHead"><p class="eyebrow">School Hub</p><h2>Schule</h2><p class="muted">Fächer, Klausuren und Lernziele.</p></div>
+
+      <div class="layoutTwo">
+        <section class="panel">
+          <div class="panelHead"><h3>Fächer</h3><span id="subjectCount">0</span></div>
+          <form id="subjectForm" class="form compact">
+            <input id="subjectName" placeholder="Fach">
+            <input id="subjectGoal" type="number" min="0" max="15" value="12">
+            <button>Fach hinzufügen</button>
+          </form>
+          <div id="subjectList" class="list"></div>
+        </section>
+
+        <section class="panel">
+          <div class="panelHead"><h3>Klausur eintragen</h3><span>Neu</span></div>
+          <form id="examForm" class="form compact">
+            <select id="examSubject"></select>
+            <input id="examTitle" placeholder="Thema">
+            <input id="examDate" type="date">
+            <select id="examPriority"><option>Mittel</option><option>Hoch</option><option>Dringend</option></select>
+            <select id="examStatus"><option>Nicht begonnen</option><option>Am Lernen</option><option>Fast bereit</option><option>Bereit</option></select>
+            <button>Klausur speichern</button>
+          </form>
+        </section>
+      </div>
+
+      <section class="panel">
+        <div class="panelHead"><h3>Klausurplaner</h3><span id="examCountFull">0</span></div>
+        <div id="examList" class="list"></div>
+      </section>
+    </section>
+
+    <section id="grades" class="page">
+      <div class="pageHead"><p class="eyebrow">Grade Tracker</p><h2>Noten</h2><p class="muted">0–15 Punkte, Durchschnitt und Zielnoten.</p></div>
+
+      <div class="statsGrid three">
+        <div class="stat"><span>Gesamtdurchschnitt</span><strong id="totalAverageBig">-</strong><p>Punkte</p></div>
+        <div class="stat"><span>Noten</span><strong id="gradesCount">0</strong><p>Einträge</p></div>
+        <div class="stat"><span>Fächer</span><strong id="subjectsCountGrades">0</strong><p>aktiv</p></div>
+      </div>
+
+      <form id="gradeForm" class="form wide">
+        <select id="gradeSubject"></select>
+        <input id="gradePoints" type="number" min="0" max="15" value="10">
+        <select id="gradeType"><option>Klausur</option><option>Mündlich</option><option>Test</option><option>Sonstiges</option></select>
+        <input id="gradeNote" placeholder="Notiz">
+        <button>Note speichern</button>
+      </form>
+
+      <section class="panel"><div class="panelHead"><h3>Fächerübersicht</h3><span>Ziele</span></div><div id="subjectGradeGrid" class="gradeGrid"></div></section>
+      <section class="panel"><div class="panelHead"><h3>Notenverlauf</h3><span id="gradeHistoryCount">0</span></div><div id="gradeList" class="list"></div></section>
+    </section>
+
+    <section id="settings" class="page">
+      <div class="pageHead"><p class="eyebrow">Settings</p><h2>Einstellungen</h2><p class="muted">Lokale Daten verwalten.</p></div>
+      <section class="panel"><button id="resetData" class="danger">Alle lokalen Daten löschen</button></section>
+    </section>
+  </main>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
