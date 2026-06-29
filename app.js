@@ -20,9 +20,9 @@ const defaultData = {
   ]
 };
 
-let data = JSON.parse(localStorage.getItem("planlyDataV3") || "null") || defaultData;
+let data = JSON.parse(localStorage.getItem("planlyDataV4") || "null") || JSON.parse(localStorage.getItem("planlyDataV3") || "null") || defaultData;
 
-function save(){ localStorage.setItem("planlyDataV3", JSON.stringify(data)); }
+function save(){ localStorage.setItem("planlyDataV4", JSON.stringify(data)); }
 function uid(){ return crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36); }
 function fmtDate(date){ return new Date(date).toLocaleDateString("de-DE"); }
 function daysUntil(date){
@@ -114,13 +114,16 @@ $("gradeForm").addEventListener("submit", e=>{
 $("resetData").addEventListener("click",()=>{
   if(confirm("Wirklich alle Daten löschen?")){
     localStorage.removeItem("planlyDataV3");
+    localStorage.removeItem("planlyDataV4");
     data = JSON.parse(JSON.stringify(defaultData));
     save(); render();
   }
 });
 
 function renderDashboard(){
-  $("todayLabel").textContent = new Date().toLocaleDateString("de-DE",{weekday:"long",day:"2-digit",month:"long"});
+  const label = new Date().toLocaleDateString("de-DE",{weekday:"long",day:"2-digit",month:"long"});
+  $("todayLabel").textContent = label;
+  $("sidebarToday").textContent = label;
   const open = data.tasks.filter(t=>!t.done).length;
   const done = data.tasks.filter(t=>t.done).length;
   const progress = data.tasks.length ? Math.round(done/data.tasks.length*100) : 0;
